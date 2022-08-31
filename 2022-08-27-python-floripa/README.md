@@ -20,7 +20,7 @@ Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf) / [Speake
     </details></li>
     <li><details><summary>31/08/2022</summary>
         <ul>
-            <li>Revisão textual (Muito obrigado <a target=”_blank” href="https://github.com/lucasjct">@lucasjct</a>)</li>
+            <li>Revisão textual (Muito obrigado <a target="_blank" href="https://github.com/lucasjct">@lucasjct</a>)</li>
         </ul>
     </details></li>
 </ul>
