@@ -21,6 +21,7 @@ Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf) / [Speake
     <li><details><summary>31/08/2022</summary>
         <ul>
             <li>Revisão textual (Muito obrigado <a target="_blank" href="https://github.com/lucasjct">@lucasjct</a>)</li>
+            <li>Correção do link para "WGSI Tutorial" (Muito obrigado <a target="_blank" href="https://github.com/lucasjct">@lucasjct</a>)</li>
         </ul>
     </details></li>
 </ul>
@@ -36,9 +37,9 @@ Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf) / [Speake
 
 ## 00 - Razões, considerações e referências
 
-### Por que vamos criar nosso proprio framework?
+### Por que vamos criar nosso próprio framework?
 
-- Por que criar um seu proprio ____?
+- Por que criar um seu próprio ____?
 - **Por razões de aprendizado/estudo**;
 - por precisar de algo muito específico/não existente ainda;
 - Por que não?
@@ -118,7 +119,7 @@ class BooksResource:
 - [How to write a Python web framework (paid/testdriven.io version)](https://testdriven.io/courses/python-web-framework/) - Jahongir Rahmonov
 - [Let's build a web framework! PyCon 2017](https://www.youtube.com/watch?v=7kwnjoAJ2HQ) - Jacob Kaplan Moss
 - [Let’s Build A Web Server [Part 2]](https://ruslanspivak.com/lsbaws-part2/) - Ruslan Spivak
-- [WGSI Tutorial](link_cinco) - Clodoaldo Pinto Neto
+- [WGSI Tutorial](https://wsgi.tutorial.codepoint.net/) - Clodoaldo Pinto Neto
 - [EXTRA] [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) - comunidade/open source
 
 ## 01 - Web Server, Web App e WSGI
