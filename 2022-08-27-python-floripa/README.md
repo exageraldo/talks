@@ -34,34 +34,34 @@ Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf) / [Speake
 
 - Por que criar um seu proprio ____?
 - **Por razões de aprendizado/estudo**;
-- por precisar de algo muito especifico/não existente ainda;
+- por precisar de algo muito específico/não existente ainda;
 - Por que não?
 
 ### Considerações iniciais
 
-#### Sugestões para melhor acompanhar esse conteudo
+#### Sugestões para melhor acompanhar esse conteúdo
 
 - Já possua alguma familiaridade com Python;
-- Possua um conhecimento minimo sobre web;
+- Possua um conhecimento mínimo sobre web;
 - Já tenha utilizado algum framework web.
 
 #### O que é "Frasko"?
 
-É um framework (ou pelo menos a ideia de um) feito para fins de estudo/ensino sobre conceitos básicos/iniciais de um framework web. A maioria das referencias foram tiradas do Flask, inclusive o nome (`flask` significa frasco/garrafa em portugues).
+É um framework (ou pelo menos a ideia de um) feito para fins de estudo/ensino sobre conceitos básicos/iniciais de um framework web. A maioria das referências foram tiradas do Flask, inclusive o nome (`flask` significa frasco/garrafa em português).
 
 #### O que seria um "nano framework"?
 
-Em questão de números, `Nano` (10^-9) é menor do que `Micro` (10^-6); já documentação do Flask podemos ter uma ideia do que "microframework" significa ([link](https://flask.palletsprojects.com/en/2.1.x/foreword/#what-does-micro-mean)). Dessa forma, podemos tomar a referencia de que nosso nano framework vai ser bem simples, funcionalidades mínimas para seu funcionamento.
+Em questão de números, `Nano` (10^-9) é menor do que `Micro` (10^-6); já documentação do Flask podemos ter uma ideia do que "microframework" significa ([link](https://flask.palletsprojects.com/en/2.1.x/foreword/#what-does-micro-mean)). Dessa forma, podemos tomar a referência de que nosso nano framework vai ser bem simples, com funcionalidades mínimas para seu funcionamento.
 
 #### Código
 
-Os códigos desse tutorial estão disponivel na pasta `conteúdo`.
+Os códigos desse tutorial estão disponíveis na pasta `conteúdo`.
 
 Todos eles estão prontos para serem executados, basta instalar as dependências.
 
-#### Por que coloquei as referências no inicio?
+#### Por que coloquei as referências no início?
 
-Não tenho nenhuma razão especifica, apenas que considero todos esses trabalhos de extrema importancia para a criação desse tutoria.
+Não tenho nenhuma razão especifica, apenas que considero todos esses trabalhos de extrema importância para a criação desse tutorial.
 
 #### Prévia
 
@@ -136,7 +136,7 @@ class BooksResource:
 
 #### Problema
 
-- Quem desenvolvia o app (geralmente) não queria lidar com o server (e vice versa)
+- Quem desenvolvia o app (geralmente) não queria lidar com o server (e vice-versa)
 - Incompatibilidade entre app e server limitava bastante as escolhas
 - Criar adaptadores entre app e server era complicado e custoso de manter
     - Um dos mais famosos é o [`mod_python`](https://modpython.org/) para Apache
@@ -172,7 +172,7 @@ Imagem do [Toptal/Developers - WSGI: The Server-Application Interface for Python
 ### webob
 
 - Fornece objetos para requisições (`request`) e respostas (`response`) HTTP.
-- São objetos de facil escrita/leitura
+- São objetos de fácil escrita/leitura
 - [webob no pypi](https://pypi.org/project/WebOb/)
 
 ### parse
@@ -183,7 +183,7 @@ Imagem do [Toptal/Developers - WSGI: The Server-Application Interface for Python
 
 ## 03 - Montando nossos objetos de `Request` e `Response`
 
-Não precisamos nada alem de uma função (`Callable`) que receba `environ` e `start_response`.
+Não precisamos nada além de uma função (`Callable`) que receba `environ` e `start_response`.
 
 ```python
 # app.py
@@ -219,7 +219,7 @@ def frasko(
 
 [[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/01-request-response/01-estrutura-minima-fun%C3%A7%C3%A3o/frasko.py)]
 
-Exemplo de como vem o `environ`:
+Exemplo de como retorna o `environ`:
 
 ```python
 sample_environ = {
@@ -291,7 +291,7 @@ class Frasko:
 
 ## 04 - Roteamento simples, parametrizado e rota padrão (404)
 
-Agora vamos poder definir os caminhos das rotas que desejarmos, porem sem definir os verbos/metodos por enquanto.
+Agora vamos poder definir os caminhos das rotas que desejarmos, porém sem definir os verbos/métodos por enquanto.
 
 ```python
 # app.py
@@ -350,7 +350,7 @@ class Frasko:
 
 [[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/01-rotas-simples-sem-metodos/frasko.py)]
 
-### Definindo rotas com verbos/metodos (explícitos)
+### Definindo rotas com verbos/métodos (explícitos)
 
 ```python
 # app.py
