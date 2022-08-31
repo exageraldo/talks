@@ -10,10 +10,14 @@ Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf) / [Speake
 
 ## Changelog
 
-- 30/08/2022
-    - Correção de alguns slides
-    - remoção do `gunicorn` das dependências
-    - criação do material no README
+<ul><li><details>
+    <summary>30/08/2022</summary>
+    <ul>
+        <li>Correção de alguns slides</li>
+        <li>Remoção do "gunicorn" das dependências</li>
+        <li>Criação do material no README</li>
+    </ul>
+</details></li></ul>
 
 ## Conteúdo
 
