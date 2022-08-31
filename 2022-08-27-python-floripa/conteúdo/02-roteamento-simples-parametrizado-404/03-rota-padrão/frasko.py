@@ -1,14 +1,11 @@
-# Roteamento (com metodos/verbos)
-# - agora rotas são especificadas (independente do metodo)
-# - se uma rota não for encontrada, vai mostrar apenas (None, 200)
-
+""" 404 - "NOT FOUND"
+- sempre que uma rota não for encontrada, vai enviar o
+  status code 404 e a mensagem "NOT FOUND" na resposta
+"""
 from typing import Dict, Callable, List, Optional, Tuple
-
 from webob import Response, Request
 
-
 class Frasko:
-
     def __init__(self) -> None:
         self._routes = {}
 
@@ -29,13 +26,20 @@ class Frasko:
             return handler
 
         return wrapper
+
+    def _set_default_response(self, response: 'Response') -> None:
+        response.text = "NOT FOUND"
+        response.status_code = 404
     
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response()
         routes = self._routes.get(request.method.lower(), {})
         for path, handler in routes.items():
-            if path == request.path:
-                handler(request, response)
-                return response
+            if path != request.path:
+                continue
 
+            handler(request, response)
+            return response
+
+        self._set_default_response(response)
         return response

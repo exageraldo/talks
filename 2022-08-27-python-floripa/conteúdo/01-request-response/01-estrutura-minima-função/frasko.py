@@ -1,11 +1,9 @@
-# Criando a interface minima (função)
-# - independente da rota/metodo, a resposta será sempre a mesma
-# - não podemos definir/criar nenhuma rota ainda. é a estrutura/interface minima esperada
-
+""" Criando a interface minima (função)
+- independente da rota/metodo, a resposta será sempre a mesma
+- não podemos definir/criar nenhuma rota ainda. é a estrutura/interface minima esperada
+"""
 from typing import Dict, Callable, List, Optional, Tuple
-
 from webob import Response, Request
-
 
 def frasko(
     environ: 'Dict',
@@ -18,11 +16,10 @@ def frasko(
 
     request = Request(environ) # vamos usar jaja
     response = Response()
-    response.text = "passo 00"
+    response.text = "passo 01.01"
     response.status_code = 200
 
     return response(environ, start_response)
-
 
 # sample_environ = {
 #     'HTTP_ACCEPT': '*/*',

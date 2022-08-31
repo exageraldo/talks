@@ -1,21 +1,13 @@
-# Class Based decorators
-# - possibilida decorar uma classe inteira, onde os metodos
-#   da classe terão os mesmos nomes dos metodos/verbos http (get, post, put,...)
-
 from typing import Dict, Callable, List, Optional, Tuple
 import inspect
-
 from webob import Response, Request
 from parse import parse
-
 
 class FraskoException(Exception):
     """ A base class for exceptions used by frasko. """
     pass
 
-
 class Frasko:
-
     def __init__(self) -> None:
         self._routes = {}
 

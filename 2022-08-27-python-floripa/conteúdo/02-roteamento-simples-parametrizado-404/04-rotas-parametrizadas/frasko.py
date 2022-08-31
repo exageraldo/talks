@@ -1,15 +1,12 @@
-# Parametrização das rotas
-# - parametros podem ser definidos nas rotas e serão
-#   passados via parametros para as funções
-
+""" Parametrização das rotas
+- parametros podem ser definidos nas rotas e serão
+  passados via parametros para as funções
+"""
 from typing import Dict, Callable, List, Optional, Tuple
-
 from webob import Response, Request
 from parse import parse
 
-
 class Frasko:
-
     def __init__(self) -> None:
         self._routes = {}
 

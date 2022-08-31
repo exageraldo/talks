@@ -1,16 +1,13 @@
-# Class Based decorators
-# - possibilida decorar uma classe inteira, onde os metodos
-#   da classe terão os mesmos nomes dos metodos/verbos http (get, post, put,...)
-
 from typing import Dict, Callable, List, Optional, Tuple
 import inspect
-
 from webob import Response, Request
 from parse import parse
 
+class FraskoException(Exception):
+    """ A base class for exceptions used by frasko. """
+    pass
 
 class Frasko:
-
     def __init__(self) -> None:
         self._routes = {}
 
@@ -23,6 +20,16 @@ class Frasko:
         response = self._handle_request(request)
 
         return response(environ, start_response)
+    
+    def _default_response(self, response: 'Response') -> None:
+        response.text = "NOT FOUND"
+        response.status_code = 404
+    
+    def route(self, path, method="get"):
+        def wrapper(handler):
+            self.add_route(path, handler, method)
+            return handler
+        return wrapper
 
     def add_route(self, path, handler, method="get"):
         if inspect.isclass(handler):
@@ -31,20 +38,14 @@ class Frasko:
             )
             for method in methods:
                 routes = self._routes.setdefault(method, {})
+                if path in routes:
+                    raise FraskoException("Such route already exists.")
                 routes[path] = getattr(handler(), method)
         else:
             routes = self._routes.setdefault(method, {})
+            if path in routes:
+                raise FraskoException("Such route already exists.")
             routes[path] = handler
-
-    def route(self, path, method="get"):
-        def wrapper(handler):
-            self.add_route(path, handler, method)
-            return handler
-        return wrapper
-    
-    def _default_response(self, response: 'Response') -> None:
-        response.text = "NOT FOUND"
-        response.status_code = 404
     
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response()

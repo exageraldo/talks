@@ -6,16 +6,23 @@ Evento: 65º Python Floripa ([Meetup](https://www.meetup.com/Floripa-Python-Meet
 
 Apresentação: [YouTube](https://youtu.be/b6Ow1eBy7RI?t=1252)
 
-Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf)/[SpeakerDeck](https://speakerdeck.com/exageraldo/65o-python-floripa-frasko-desenvolvendo-seu-proprio-nano-web-framework)
+Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf) / [SpeakerDeck](https://speakerdeck.com/exageraldo/65o-python-floripa-frasko-desenvolvendo-seu-proprio-nano-web-framework)
+
+## Changelog
+
+- 30/08/2022
+    - Correção de alguns slides
+    - remoção do `gunicorn` das dependências
+    - criação do material no README
 
 ## Conteúdo
 
-- 00 - Razões, considerações e referências
-- 01 - Web app, Web server e WSGI
-- 02 - Dependências
-- 03 - Request e Response
-- 04 - Rotas simples, rotas parametrizadas e 404
-- 05 - Class Based Decorators e rotas duplicadas
+- 00 - [Razões, considerações e referências](#00---razões-considerações-e-referências)
+- 01 - [Web App, Web Server e WSGI](#01---web-server-web-app-e-wsgi)
+- 02 - [Dependências](#02---dependências)
+- 03 - [Montando nossos objetos de `Request` e `Response`](#03---montando-nossos-objetos-de-request-e-response)
+- 04 - [Roteamento simples, parametrizado e rota padrão (404)](#04---roteamento-simples-parametrizado-e-rota-padrão-404)
+- 05 - [Decorando classes e lidando com rotas duplicadas](#05---decorando-classes-e-lidando-com-rotas-duplicadas)
 
 ## 00 - Razões, considerações e referências
 
@@ -42,7 +49,17 @@ Slides: [PDF](frasko-desenvolvendo-seu-proprio-nano-web-framework.pdf)/[SpeakerD
 
 Em questão de números, `Nano` (10^-9) é menor do que `Micro` (10^-6); já documentação do Flask podemos ter uma ideia do que "microframework" significa ([link](https://flask.palletsprojects.com/en/2.1.x/foreword/#what-does-micro-mean)). Dessa forma, podemos tomar a referencia de que nosso nano framework vai ser bem simples, funcionalidades mínimas para seu funcionamento.
 
-### Prévia
+#### Código
+
+Os códigos desse tutorial estão disponivel na pasta `conteúdo`.
+
+Todos eles estão prontos para serem executados, basta instalar as dependências.
+
+#### Por que coloquei as referências no inicio?
+
+Não tenho nenhuma razão especifica, apenas que considero todos esses trabalhos de extrema importancia para a criação desse tutoria.
+
+#### Prévia
 
 ```python
 from frasko import Frasko, Request, Response
@@ -83,6 +100,8 @@ class BooksResource:
 
 ```
 
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/00-pr%C3%A9via/app.py)]
+
 ### Referências
 
 - [How to write a Python web framework (free/blog post version)](https://rahmonov.me/posts/write-python-framework-part-one/) - Jahongir Rahmonov
@@ -92,9 +111,9 @@ class BooksResource:
 - [WGSI Tutorial](link_cinco) - Clodoaldo Pinto Neto
 - [EXTRA] [Build Your Own X](https://github.com/codecrafters-io/build-your-own-x) - comunidade/open source
 
-## 01 - Web server, Web app e WSGI
+## 01 - Web Server, Web App e WSGI
 
-### web server
+### Web Server
 
 - Espera pacientemente por uma requisição (`Request`)
 - Recebe um request do cliente e envia para o `web_app`/"`PythonApp`"
@@ -102,7 +121,7 @@ class BooksResource:
 - Envia a resposta para o cliente de volta
 - Exemplos: gunicorn, uwsgi
 
-### web app
+### Web App
 
 - Recebe a requisição enviada pelo `web server`
 - Executa alguns comandos a partir de regras definidas
@@ -116,7 +135,7 @@ class BooksResource:
 - Quem desenvolvia o app (geralmente) não queria lidar com o server (e vice versa)
 - Incompatibilidade entre app e server limitava bastante as escolhas
 - Criar adaptadores entre app e server era complicado e custoso de manter
-    - O mais famoso é o [`mod_python`](https://modpython.org/) para Apache
+    - Um dos mais famosos é o [`mod_python`](https://modpython.org/) para Apache
 
 ### Solução
 
@@ -125,8 +144,8 @@ class BooksResource:
 - `É uma especificação de comunicação entre o servidor e a aplicação`
 - Nada mais é do que uma boa conversa
 - Ambos os lados devem aplicar as especificações (`web app` e `web server`)
-- `WSGI server`: deve chamar o objeto *app* com os parametros `environ` (dicionario) e `start_response` (função). (`app(environ, start_response)`)
-- `WSGI app`: deve chamar a função `start_response` com o `status_code` e `headers_response` (`start_response(status_code, headers_response, exc_info=None)`) antes de retornar o body para o server.
+- `WSGI Server`: deve chamar o objeto *app* com os parametros `environ` (dicionario) e `start_response` (função). (`app(environ, start_response)`)
+- `WSGI App`: deve chamar a função `start_response` com o `status_code` e `headers_response` (`start_response(status_code, headers_response, exc_info=None)`) antes de retornar o body para o server.
     - O `exc_info` é uma informação opcional que só será passada caso algum erro/`Exception` aconteça.
 - Mais detalhes na [PEP 3333](https://peps.python.org/pep-3333/)
 
@@ -134,13 +153,13 @@ class BooksResource:
 
 ![](https://www.fullstackpython.com/img/visuals/wsgi-interface.png)
 
-[Imagem do FullStackPython - WSGI Servers](https://www.fullstackpython.com/wsgi-servers.html)
+Imagem do [FullStackPython - WSGI Servers](https://www.fullstackpython.com/wsgi-servers.html)
 
 ---
 
 ![](https://bs-uploads.toptal.io/blackfish-uploads/uploaded_file/file/192775/image-1582505123212-d71812e36fd836399c48a034f9e70128.png)
 
-[Imagem do Toptal/Developers - WSGI: The Server-Application Interface for Python](https://www.fullstackpython.com/wsgi-servers.html)
+Imagem do [Toptal/Developers - WSGI: The Server-Application Interface for Python](https://www.fullstackpython.com/wsgi-servers.html)
 
 ---
 
@@ -158,7 +177,7 @@ class BooksResource:
 - Analisa strings a partir de padrões definidos
 - [parse no pypi](https://pypi.org/project/parse/)
 
-## 03 - Request e Response
+## 03 - Montando nossos objetos de `Request` e `Response`
 
 Não precisamos nada alem de uma função (`Callable`) que receba `environ` e `start_response`.
 
@@ -169,6 +188,8 @@ from frasko import frasko
 # apenas pra manter o mesmo formato
 app = frasko
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/01-request-response/01-estrutura-minima-fun%C3%A7%C3%A3o/app.py)]
 
 ```python
 # frasko.py
@@ -191,6 +212,8 @@ def frasko(
 
     return response(environ, start_response)
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/01-request-response/01-estrutura-minima-fun%C3%A7%C3%A3o/frasko.py)]
 
 Exemplo de como vem o `environ`:
 
@@ -236,6 +259,8 @@ from frasko import Frasko
 app = Frasko()
 ```
 
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/01-request-response/02-estrutura-minima-classe/app.py)]
+
 ```python
 # frasko.py
 from typing import Dict, Callable, List, Optional, Tuple
@@ -258,7 +283,9 @@ class Frasko:
         return response
 ```
 
-## 04 - Rotas simples, rotas parametrizadas e 404
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/01-request-response/02-estrutura-minima-classe/frasko.py)]
+
+## 04 - Roteamento simples, parametrizado e rota padrão (404)
 
 Agora vamos poder definir os caminhos das rotas que desejarmos, porem sem definir os verbos/metodos por enquanto.
 
@@ -277,6 +304,8 @@ def barra(request: 'Request', response: 'Response') -> None:
 def menu(request: 'Request', response: 'Response') -> None:
     response.text = "passo 02 - MENU"
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/01-rotas-simples-sem-metodos/app.py)]
 
 ```python
 # frasko.py
@@ -315,6 +344,8 @@ class Frasko:
         return response
 ```
 
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/01-rotas-simples-sem-metodos/frasko.py)]
+
 ### Definindo rotas com verbos/metodos (explícitos)
 
 ```python
@@ -332,6 +363,8 @@ def get_barra(request: 'Request', response: 'Response') -> None:
 def post_barra(request: 'Request', response: 'Response') -> None:
     response.text = "passo 03 - BARRA POST"
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/02-rotas-simples-com-metodos/app.py)]
 
 ```python
 # frasko.py
@@ -371,6 +404,8 @@ class Frasko:
         return response
 ```
 
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/02-rotas-simples-com-metodos/frasko.py)]
+
 ### Parametrizando as rotas
 
 ```python
@@ -387,6 +422,8 @@ def olar_x_vezes(request: 'Request', response: 'Response', vezes: int) -> None:
 def olar_fulano(request: 'Request', response: 'Response', nome: str) -> None:
     response.text = f"passo 05 - OLAR {nome} GET"
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/04-rotas-parametrizadas/app.py)]
 
 ```python
 # frasko.py
@@ -435,7 +472,9 @@ class Frasko:
         return response
 ```
 
-## 05 - Class Based Decorators e rotas duplicadas
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/02-roteamento-simples-parametrizado-404/04-rotas-parametrizadas/frasko.py)]
+
+## 05 - Decorando classes e lidando com rotas duplicadas
 
 ```python
 # app.py
@@ -451,6 +490,8 @@ class BooksResource:
     def post(self, request: 'Request', response: 'Response'):
         response.text = "passo 06 - BOOK POST"
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/03-decorando-classes-e-rotas-duplicadas/02-rotas-duplicadas/app.py)]
 
 ```python
 # frasko.py
@@ -517,3 +558,5 @@ class Frasko:
         self._default_response(response)
         return response
 ```
+
+[[Link do código](/2022-08-27-python-floripa/conte%C3%BAdo/03-decorando-classes-e-rotas-duplicadas/02-rotas-duplicadas/frasko.py)]
