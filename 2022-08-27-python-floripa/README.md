@@ -287,7 +287,7 @@ class Frasko:
         response = self._handle_request(request)
 
         return response(environ, start_response)
-    
+
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response("passo 01", 200)
 
@@ -336,14 +336,14 @@ class Frasko:
         response = self._handle_request(request)
 
         return response(environ, start_response)
-    
+
     def route(self, path: str):
         def wrapper(handler: 'Callable[[Request, Response], None]'):
             self._routes[path] = handler
             return handler
 
         return wrapper
-    
+
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response()
 
@@ -395,7 +395,7 @@ class Frasko:
         response = self._handle_request(request)
 
         return response(environ, start_response)
-    
+
     def route(self, path: str, method="get"):
         routes = self._routes.setdefault(method, {})
         def wrapper(handler: 'Callable[[Request, Response], None]'):
@@ -403,7 +403,7 @@ class Frasko:
             return handler
 
         return wrapper
-    
+
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response()
         routes = self._routes.get(request.method.lower(), {})
@@ -455,7 +455,7 @@ class Frasko:
         response = self._handle_request(request)
 
         return response(environ, start_response)
-    
+
     def route(self, path: str, method="get"):
         routes = self._routes.setdefault(method, {})
         def wrapper(handler: 'Callable[[Request, Response], None]'):
@@ -463,11 +463,11 @@ class Frasko:
             return handler
 
         return wrapper
-    
+
     def _default_response(self, response: 'Response') -> None:
         response.text = "NOT FOUND"
         response.status_code = 404
-    
+
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response()
         routes = self._routes.get(request.method.lower(), {})
@@ -528,11 +528,11 @@ class Frasko:
         response = self._handle_request(request)
 
         return response(environ, start_response)
-    
+
     def _default_response(self, response: 'Response') -> None:
         response.text = "NOT FOUND"
         response.status_code = 404
-    
+
     def route(self, path, method="get"):
         def wrapper(handler):
             self.add_route(path, handler, method)
@@ -554,7 +554,7 @@ class Frasko:
             if path in routes:
                 raise FraskoException("Such route already exists.")
             routes[path] = handler
-    
+
     def _handle_request(self, request: 'Request') -> 'Response':
         response = Response()
         routes = self._routes.get(request.method.lower(), {})
