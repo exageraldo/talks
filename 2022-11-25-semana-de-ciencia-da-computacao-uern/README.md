@@ -1,10 +1,10 @@
 # Uma introdução a Metaprogramação (com Python)
 
-Evento: Semana de Ciência da Computação 2022a ([Even3]( https://www.even3.com.br/semana-de-ciencia-da-computacao-2022-pesquisa-cientifica-inovacao-tecnologia-e-empreendedorismo-desenvolvimento-regional-295696/))
+Evento: Semana de Ciência da Computação 2022 ([Even3]( https://www.even3.com.br/semana-de-ciencia-da-computacao-2022-pesquisa-cientifica-inovacao-tecnologia-e-empreendedorismo-desenvolvimento-regional-295696/))
 
 Apresentação: [YouTube](https://www.youtube.com/watch?v=C-RUXky1DaQ)
 
-<!-- Slides: [PDF]() / [SpeakerDeck]() -->
+Slides: [PDF](uma-introdução-a-metaprogramacao-com-python.pdf) / [SpeakerDeck](https://speakerdeck.com/exageraldo/uern-2022-uma-introducao-a-metaprogramacao-com-python)
 
 ## Conteúdo
 
@@ -151,6 +151,8 @@ int main() {
 
 Outro exemplo é o `eval`, suportado por diversas linguagens. Ele permite que um trecho de código/expressão seja formado usando-se não somente um texto estático mas também componentes dinâmicos.
 ```Python
+
+eval("10+10")
 from itertools import cycle
 
 def operacoes_em_lista(ops: list, nums: list) -> int:
@@ -177,6 +179,8 @@ O uso tanto do `eval` como do `exec` devem ser feitos com muito cuidado!
 
 Toda linguagem que possui funções de primeira classe abre espaço para que as mesmas sejam modificadas programaticamente. A forma mais simples é através de decoradores.
 ```Python
+
+func_um = func_decorator(func_um)
 def decorator(function):
     def wrapper(arg1, arg2):
         print(f"Function name: {function.__name__}")
