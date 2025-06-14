@@ -1,0 +1,18 @@
+[project]
+name = "dinofauro-bot"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Geraldo Castro",email = "geraldo.castro@thoughtworks.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "python-telegram-bot (==22.1)",
+    "pydantic-settings (==2.9.1)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
